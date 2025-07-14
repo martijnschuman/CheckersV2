@@ -139,6 +139,7 @@ namespace CheckersAPI.Controllers {
             UpdateCheckersPieces(game.Board);
 
             // Save game to database
+            _context.Update(game);
             _context.Update(user);
             _context.SaveChanges();
 
