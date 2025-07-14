@@ -293,7 +293,7 @@ namespace CheckersAPI.Models.Checkers.Game {
                 return new CheckerResponseModel { Status = "ERROR", Message = "Invalid move: The destination square is already occupied.", IsValid = false };
             }
 
-            return new CheckerResponseModel { Status = "SUCCES", IsValid = true };
+            return new CheckerResponseModel { Status = "SUCCESS", IsValid = true };
         }
 
         /// <summary>
