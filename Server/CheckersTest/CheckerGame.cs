@@ -365,7 +365,7 @@ namespace CheckersAPI.Models {
             GameState = GameStateOptions.InProgress;
 
             if (IsGameOver()) {
-                Console.WriteLine("Invlid move: Game is finnished, winner: " + Winner.UserName);
+                Console.WriteLine("Invalid move: Game is finished, winner: " + Winner.UserName);
                 return true;
             };
 
