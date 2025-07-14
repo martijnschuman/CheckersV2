@@ -1,0 +1,13 @@
+.env.client
+.env.server
+Client/martijnschuman/.env
+/Server/.vs
+/Server/CheckersAPI.Moq/bin
+/Server/CheckersAPI.Moq/obj
+/Server/CheckersAPI/.vs
+/Server/CheckersAPI/bin
+/Server/CheckersAPI/obj
+/Server/CheckersTest/obj
+/Server/CheckersTest/bin
+/Server/CheckersTest/bin
+/Server/CheckersTest/bin/Debug

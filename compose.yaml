@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: checkers_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: checkers_user
+      POSTGRES_PASSWORD: checkers_password
+      POSTGRES_DB: checkers_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+
+  client:
+    build:
+      context: ./Client
+      dockerfile: ./Dockerfile
+    container_name: checkers_client
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./Client
+
+  server:
+    build:
+      context: ./Server/CheckersAPI
+      dockerfile: ./Dockerfile
+    container_name: checkers_server
+    restart: always
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    env_file:
+      - ./Server/CheckersAPI/.env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: checkers_user
+      DB_PASSWORD: checkers_password
+      POSTGRES_DB: checkers_db
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./Server/CheckersAPI
+
+volumes:
+  postgres_data:
