@@ -327,7 +327,7 @@ namespace CheckersAPI.Models {
             }
 
             // Check for move to same location
-            if (startRow == endRow || startCol == endCol) {
+            if (startRow == endRow && startCol == endCol) {
                 Console.WriteLine("Invalid move: Pieces can not move to the same location.");
                 return false;
             }
